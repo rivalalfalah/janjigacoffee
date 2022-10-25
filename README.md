@@ -34,10 +34,10 @@
 | Endpoint      |               Method                | Info              |
 | ------------- | :---------------------------------: | :---------------- |
 | /auth         |               `POST`                | Auth              |
-| /users        |        `GET` `PATCH` `DELETE`       | Users             |
+| /users        |    `POST` `GET` `PATCH` `DELETE`    | Users             |
 | /products     |    `POST` `GET` `PATCH` `DELETE`    | Products          |
 | /promos       |    `POST` `GET` `PATCH` `DELETE`    | Promos            |
-| /transactions |    `POST` `GET` `PATCH` `delete`    | Transactions      |
+| /transactions |    `POST` `GET` `PATCH` `DELETE`    | Transactions      |
 
 ## POSTMAN DOCUMENTATION
 [Postman](https://documenter.getpostman.com/view/23804140/2s83zjr39w)
