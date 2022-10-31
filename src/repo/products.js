@@ -15,9 +15,9 @@ const searchAllProduct = (queryparams) => {
     // Filter category
     if (queryparams.category) {
       if (queryparams.name_product) {
-        query += `and lower(category.name) like lower('${queryparams.category}') `;
+        query += `and product.category_id = ${queryparams.category_id} `;
       } else {
-        query += `where lower(category.name) like lower('${queryparams.category}') `;
+        query += `product.category_id = ${queryparams.category_id} `;
       }
     }
 
