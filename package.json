@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node" : "16.x"
+  },
   "scripts": {
     "start": "node index",
     "dev": "nodemon index"
@@ -12,6 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cloudinary": "^1.32.0",
+    "datauri": "^4.1.0",
     "dotenv": "^16.0.3",
     "env": "^0.0.2",
     "express": "^4.18.2",

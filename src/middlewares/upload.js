@@ -2,7 +2,7 @@ const multer = require("multer");
 const path = require("path");
 
 const db = require("../config/postgre");
-const storage = multer.diskStorage({
+const diskStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "./public/images");
   },
@@ -13,6 +13,8 @@ const storage = multer.diskStorage({
     cb(null, fileName);
   },
 });
-const upload = multer({ storage: storage });
+
+const memoryStorage = multer.memoryStorage();
+const upload = multer({ storage: memoryStorage });
 
 module.exports = upload;
