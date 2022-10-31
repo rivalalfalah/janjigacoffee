@@ -21,7 +21,7 @@ main.use(`${prefix}/auth`, auth);
 // http://localhost:8080/
 main.get("/", (req, res) => {
   res.json({
-    msg: "welcome",
+    msg: "hallo",
   });
 });
 
