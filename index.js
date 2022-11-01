@@ -11,6 +11,7 @@ const mainRouter = require("./src/routes/main");
 
 //init express application
 const server = express();
+const cors = require("cors");
 
 const PORT = 8080;
 
@@ -18,7 +19,7 @@ postgreDB
   .connect()
   .then(() => {
     console.log("DB connected");
-
+    server.use(cors());
     server.use(express.static("./public"));
     server.use(express.json());
     server.use(express.urlencoded({ extended: false }));
