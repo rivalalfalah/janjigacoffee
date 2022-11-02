@@ -15,7 +15,7 @@ module.exports = {
       db.query(getPwdByEmailQuery, getPwdByEmailValues, (err, response) => {
         if (err) {
           console.log(err);
-          return reject(err);
+          return reject({ err });
         }
         if (response.rows.length === 0)
           return reject({
@@ -27,7 +27,7 @@ module.exports = {
         bcrypt.compare(password, hashedPassword, (err, isSame) => {
           if (err) {
             console.log(err);
-            return reject(err);
+            return reject({ err });
           }
           if (!isSame)
             return reject({
@@ -43,13 +43,13 @@ module.exports = {
             payLoad,
             process.env.SECRET_KEY,
             {
-              expiresIn: "5m",
+              expiresIn: "10m",
               issuer: process.env.ISSUER,
             },
             (err, token) => {
               if (err) {
                 console.log(err);
-                return reject(err);
+                return reject({ err });
               }
               return resolve({ token, payLoad });
             }
