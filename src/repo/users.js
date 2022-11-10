@@ -17,7 +17,7 @@ const getAllUsers = () => {
 const createUsers = (body) => {
   return new Promise((resolve, reject) => {
     const query =
-      "insert into users(email,password,phone_number) values($1,$2,$3) returning id,email,created_at";
+      "insert into users(email,password,phone_number) values($1,$2,$3) returning id";
     const { email, password, ["phone_number"]: phoneNumber } = body;
 
     bcrypt.hash(password, 15, (err, hash) => {
@@ -30,7 +30,15 @@ const createUsers = (body) => {
           console.log(err);
           return reject(err);
         }
-        return resolve(result);
+        const id = result.rows[0].id;
+        const queryAddId = `insert into usersdata(users_id) values(${id})`;
+        postgreDB.query(queryAddId, (err, result) => {
+          if (err) {
+            console.log(err);
+            return reject(err);
+          }
+          return resolve(result);
+        });
       });
     });
   });
@@ -121,10 +129,11 @@ const dropUsers = (params) => {
   });
 };
 
-const getId = (params) => {
+const getId = (id) => {
   return new Promise((resolve, reject) => {
-    const query = "select email,phone_number from users where id = $1";
-    postgreDB.query(query, [params.id], (err, result) => {
+    const query =
+      "select usersdata.*,users.email,users.phone_number from usersdata FULL JOIN users ON usersdata.users_id = users.id where users_id = $1";
+    postgreDB.query(query, [id], (err, result) => {
       if (err) {
         console.log(err);
         return reject(err);

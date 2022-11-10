@@ -1,4 +1,5 @@
 const express = require("express");
+const islogin = require("../middlewares/isLogin");
 
 const users = express.Router();
 
@@ -19,6 +20,6 @@ users.patch("/account", editPassword);
 
 users.delete("/:id", drop);
 
-users.get("/:id", getId);
+users.get("/profile", islogin(), getId);
 
 module.exports = users;

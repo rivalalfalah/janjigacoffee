@@ -1,3 +1,4 @@
+const { login } = require("../repo/auth");
 const usersRepo = require("../repo/users");
 
 const getAll = async (req, res) => {
@@ -48,11 +49,12 @@ const drop = async (req, res) => {
 
 const getId = async (req, res) => {
   try {
-    const response = await usersRepo.getId(req.params);
+    const response = await usersRepo.getId(req.userPayload.user_id);
     res.status(200).json({
       result: response.rows,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       msg: "internal server error",
     });
