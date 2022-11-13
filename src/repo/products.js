@@ -5,7 +5,7 @@ const products = require("../routes/products");
 const searchAllProduct = (queryparams) => {
   return new Promise((resolve, reject) => {
     let query =
-      "select products.*, promos.name, promos.diskon from products full join promos on promos.products_id = products.id ";
+      "select products.name,sizes.size,category.name, from products full join sizes on products.size_id = size.id full join category on products.category_id = category_id ";
 
     // Search name product
     if (queryparams.name_product) {
@@ -13,7 +13,7 @@ const searchAllProduct = (queryparams) => {
     }
 
     // Filter category
-    if (queryparams.category) {
+    if (queryparams.category_id) {
       if (queryparams.name_product) {
         query += `and product.category_id = ${queryparams.category_id} `;
       } else {
@@ -45,6 +45,20 @@ const searchAllProduct = (queryparams) => {
         return reject(err);
       }
       return resolve(result);
+    });
+  });
+};
+
+const getProductId = (body) => {
+  return new Promise((resolve, reject) => {
+    const query =
+      "select name,price,image,description from products where id $1";
+    postgreDB.query(query, [body], (err, queryResult) => {
+      if (err) {
+        console.log(err);
+        return reject(err);
+      }
+      resolve(queryResult);
     });
   });
 };
@@ -113,6 +127,7 @@ const dropProducts = (params) => {
 
 const productsRepo = {
   searchAllProduct,
+  getProductId,
   createProducts,
   editProducts,
   dropProducts,
