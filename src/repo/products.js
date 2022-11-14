@@ -4,8 +4,7 @@ const products = require("../routes/products");
 
 const searchAllProduct = (queryparams) => {
   return new Promise((resolve, reject) => {
-    let query =
-      "select products.name,sizes.size,category.name, from products full join sizes on products.size_id = size.id full join category on products.category_id = category_id ";
+    let query = "select name,size_id,price,category_id from products";
 
     // Search name product
     if (queryparams.name_product) {
