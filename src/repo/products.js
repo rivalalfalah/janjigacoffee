@@ -51,7 +51,7 @@ const searchAllProduct = (queryparams) => {
 const getProductId = (body) => {
   return new Promise((resolve, reject) => {
     const query =
-      "select name,price,image,description from products where id $1";
+      "select id,name,price,image,description from products where id $1";
     postgreDB.query(query, [body], (err, queryResult) => {
       if (err) {
         console.log(err);
