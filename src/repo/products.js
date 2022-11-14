@@ -4,7 +4,7 @@ const products = require("../routes/products");
 
 const searchAllProduct = (queryparams) => {
   return new Promise((resolve, reject) => {
-    let query = "select name,size_id,price,category_id from products";
+    let query = "select id,name,size_id,price,category_id from products";
 
     // Search name product
     if (queryparams.name_product) {
