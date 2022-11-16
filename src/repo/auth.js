@@ -43,7 +43,7 @@ module.exports = {
             payLoad,
             process.env.SECRET_KEY,
             {
-              expiresIn: "10m",
+              expiresIn: "100m",
               issuer: process.env.ISSUER,
             },
             (err, token) => {
